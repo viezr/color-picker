@@ -27,24 +27,20 @@ class Color_picker(tk.Tk):
         Initial GUI
         '''
         tk.Tk.__init__(self, className="Sport timer")
+        #tk.Tk.__init__(self, className="Color picker")
 
-        label_bg = "black"
-        label_fg = "#ffffff"
-        label_font = "roboto, 12"
-        green_bg = "#28a745"
-        green_ac = "#1e7b34"
-        green_hl = "#0f3e1a"
-        yellow_bg = "#ffc107"
-        yellow_ac = "#b38600"
-        yellow_hl = "#664d00"
-        grey_bg = "#6c757d"
-        grey_ac = "#474d52"
-        grey_hl = "#242629"
+        main_bg = "#6c757d"
+        main_font = "roboto, 12"
+        label_col = {"bg": "#242629", "fg": "#b38600"}
+        btn_green = {"bg": "#28a745", "fg": "#cccccc", "hover": "#1e7b34"}
+        btn_yellow = {"bg": "#ffc107", "fg": "#cccccc", "hover": "#b38600"}
+        btn_grey = {"bg": "#6c757d", "fg": "#eeeeee", "hover": "#474d52"}
+        but_hl = "#474d52"
 
         self.title("Color picker")
         self.geometry("224x288")
         self.attributes("-topmost", True)
-        self.configure(background=grey_bg)
+        self.configure(background=main_bg)
         self.overlay = None
 
         for col in [0, 2, 7]:
@@ -59,8 +55,9 @@ class Color_picker(tk.Tk):
             self.grid_rowconfigure(row, minsize=24)
 
         self.hex_label_var = tk.StringVar()
-        self.hex_label_var.set(label_fg)
+        self.hex_label_var.set("#ffffff")
         self.rgb_label_var = tk.StringVar()
+        self.rgb_label_var.set("rgb(255, 255, 255)")
 
         self.cv_size = 128
         self.labels_width = 16
@@ -79,52 +76,55 @@ class Color_picker(tk.Tk):
 
 
         self.image_canvas = tk.Canvas(self, bg="white", width=self.cv_size,
-            height=self.cv_size)
+            highlightbackground=but_hl, height=self.cv_size)
         self.image_canvas_container = self.image_canvas.create_image(
             0, 0, image=self.pil_image, anchor="nw")
         self.image_canvas.grid(row=1, column=1)
 
         self.color_canvas = tk.Canvas(self, bg="white", width=28,
-            height=self.cv_size, relief="raised", cursor="circle")
+            height=self.cv_size, relief="raised", cursor="hand1")
         self.color_canvas.grid(row=1, column=3)
         self.color_canvas_container = self.color_canvas.create_image(2, 52,
             image=self.chooser_image, anchor="nw")
         self.color_canvas.bind('<Button-1>', self.change_color)
 
         self.hex_label = tk.Label(self, text = "hex color",
-            width=self.labels_width, bg=label_bg, fg=yellow_bg, font=label_font)
+            width=self.labels_width, bg=label_col["bg"], fg=label_col["fg"],
+            font=main_font)
         self.hex_label.grid(row=3, column=1)
 
         self.rgb_label = tk.Label(self, text = "rgb color",
-            width=self.labels_width, bg=label_bg, fg=yellow_bg, font=label_font)
+            width=self.labels_width, bg=label_col["bg"], fg=label_col["fg"],
+            font=main_font)
         self.rgb_label.grid(row=4, column=1)
 
         self.coordinates = tk.Label(self, text = "coordinates",
-            width=self.labels_width, bg=label_bg, fg=yellow_bg, font=label_font)
+            width=self.labels_width, bg=label_col["bg"], fg=label_col["fg"],
+            font=main_font)
         self.coordinates.grid(row=5, column=1)
 
         self.hex_cpy_button = tk.Button(self, text="cp", command=self.hex_clipboard,
-             padx=5, highlightcolor=yellow_hl, highlightbackground=yellow_hl,
-             activebackground=yellow_ac, activeforeground="black", bg=yellow_bg,
-             fg="black", font=label_font, image=self.clipboard_image)
+            padx=5, bg=btn_yellow["bg"], fg=btn_yellow["fg"], highlightbackground=but_hl,
+            activebackground=btn_yellow["hover"], activeforeground=btn_yellow["fg"],
+            font=main_font, image=self.clipboard_image)
         self.hex_cpy_button.grid(row=3, column=3)
 
         self.rgb_cpy_button = tk.Button(self, text="cp", command=self.rgb_clipboard,
-            padx=5, highlightcolor=yellow_hl, highlightbackground=yellow_hl,
-            activebackground=yellow_ac, activeforeground="black", bg=yellow_bg,
-            fg="black", font=label_font, image=self.clipboard_image)
+            padx=5, bg=btn_yellow["bg"], fg=btn_yellow["fg"], highlightbackground=but_hl,
+            activebackground=btn_yellow["hover"], activeforeground=btn_yellow["fg"],
+            font=main_font, image=self.clipboard_image)
         self.rgb_cpy_button.grid(row=4, column=3)
 
         self.get_color_button = tk.Button(self, text="x", command=self.open_overlay,
-            padx=5, highlightcolor=green_hl, highlightbackground=green_hl,
-            activebackground=green_ac, activeforeground="white", bg=green_bg,
-            fg="white", font=label_font, image=self.picker_image)
+            padx=5, bg=btn_green["bg"], fg=btn_green["fg"], highlightbackground=but_hl,
+            activebackground=btn_green["hover"], activeforeground=btn_green["fg"],
+            font=main_font, image=self.picker_image)
         self.get_color_button.grid(row=5, column=3)
 
         self.quit_button = tk.Button(self, text="QUIT", command=quit, padx=24,
-            highlightcolor=grey_hl, highlightbackground=grey_hl,
-            activebackground=grey_ac, activeforeground="white",
-            bg=grey_bg, fg="white", font=label_font)
+            bg=btn_grey["bg"], fg=btn_grey["fg"], highlightbackground=but_hl,
+            activebackground=btn_grey["hover"], activeforeground=btn_grey["fg"],
+            font=main_font)
         self.quit_button.grid(row=7, column=1, columnspan=4)
 
     def change_color(self, event):
