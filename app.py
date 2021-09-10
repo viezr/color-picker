@@ -2,9 +2,9 @@
 '''
 Screen color identifier at mouse point, color chooser.
 Features:
-    - show zoomed area around mouse
-    - show color-block filled by color of pixel under mouse
-    - show rgb and hex color index of pixel under mouse
+    - show zoomed area around the mouse
+    - show color-block filled by color of pixel under the mouse
+    - show rgb and hex color index of pixel under the mouse
     - show mouse coordinates
     - change choosen color by clicking on color-block
 Button with "target" icon, activate main function.
@@ -26,8 +26,7 @@ class Color_picker(tk.Tk):
         '''
         Initial GUI
         '''
-        tk.Tk.__init__(self, className="Sport timer")
-        #tk.Tk.__init__(self, className="Color picker")
+        tk.Tk.__init__(self, className="Color picker")
 
         main_bg = "#6c757d"
         main_font = "roboto, 12"
@@ -62,7 +61,7 @@ class Color_picker(tk.Tk):
         self.cv_size = 128
         self.labels_width = 16
 
-        self.img_resources = Image.open("resources.png")
+        self.img_resources = Image.open("img/resources.png")
         self.pil_image = self.img_resources.crop((0, 24, 128, 25))
         self.pil_image = self.pil_image.resize((self.cv_size, self.cv_size),
             resample=Image.BOX)
