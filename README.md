@@ -1,5 +1,5 @@
 # Color picker
-![image](screenshot.png)
+![image](screenshot.png)  
 Screen color identifier at mouse point, color chooser.
 ## Features
 - show zoomed area around the mouse
@@ -8,8 +8,6 @@ Screen color identifier at mouse point, color chooser.
 - show mouse coordinates
 - change choosen color by clicking on color-block
 ## Usage
-Button with "target" icon, activate main picker function and show zoomed area around the mouse.
-
-After mouse click, main function stops and by default save hex index of the color to clipboard
-
+Button with "target" icon, activate main picker function and show zoomed area around the mouse.  
+After mouse click, main function stops and by default save hex index of the color to clipboard.  
 Click on right color block shows color palette.
